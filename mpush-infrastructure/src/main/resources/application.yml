@@ -1,0 +1,13 @@
+spring:
+    jpa:
+        database: MySQL
+        hibernate:
+            ddl-auto: validate
+            naming:
+              physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    datasource:
+        url: jdbc:mysql://localhost:3306/mpush
+        username: mpush
+        password: Mpush2017*
+        driver-class-name: com.mysql.jdbc.Driver
