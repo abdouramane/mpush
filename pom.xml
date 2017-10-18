@@ -22,7 +22,6 @@
     </dependencies>
 
     <modules>
-        <module>mpush-webapp</module>
         <module>mpush-domain</module>
         <module>mpush-infrastructure</module>
         <module>mpush-facade</module>
