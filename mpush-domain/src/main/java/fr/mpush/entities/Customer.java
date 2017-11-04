@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * Class entity for a Customer
+ *
  * @author abdourhamane
  */
 @Entity
