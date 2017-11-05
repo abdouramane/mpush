@@ -29,9 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Customer` (
-  `id` bigint(11) NOT NULL,
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) COLLATE utf8_bin NOT NULL,
-  `email` varchar(255) COLLATE utf8_bin DEFAULT NULL
+  `email` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -46,11 +47,7 @@ INSERT INTO `Customer` (`id`, `firstName`, `email`) VALUES
 -- Indexes for dumped tables
 --
 
---
--- Indexes for table `Customer`
---
-ALTER TABLE `Customer`
-  ADD PRIMARY KEY (`id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
