@@ -1,0 +1,1 @@
+--TODO ABOUDOU :Database schema script go here, remove the auto creation from application.yml and create the  databse script

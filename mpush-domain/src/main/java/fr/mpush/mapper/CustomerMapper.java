@@ -7,7 +7,8 @@ import fr.xebia.extras.selma.Mapper;
 
 import java.util.List;
 
-@Mapper(withIoC = IoC.SPRING)
+@Mapper(withIoC = IoC.SPRING, withIgnoreFields = {"fr.mpush.entities.Customer.contact",
+        "fr.mpush.entities.Customer.category"})
 public interface CustomerMapper {
 
     CustomerDTO asCustomerDTO(Customer in);
