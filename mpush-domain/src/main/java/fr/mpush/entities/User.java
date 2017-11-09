@@ -10,12 +10,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "t_user")
-public class User extends Customer{
-
-    @Column(name = "USER_ID")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
+@DiscriminatorValue(value = "User")
+public class User extends Customer {
 
     @Column(name = "USER_LOGIN")
     private String login;
@@ -26,15 +22,14 @@ public class User extends Customer{
     @Column(name = "USER_ROLE")
     private String role;
 
+    public User(){
+        super();
+    }
+
     public User(String login, String password, String role) {
         this.login = login;
         this.password = password;
         this.role = role;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
     }
 
     public String getLogin() {

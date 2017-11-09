@@ -39,9 +39,9 @@ CREATE TABLE `Customer` (
 -- Dumping data for table `Customer`
 --
 
-INSERT INTO `Customer` (`id`, `firstName`, `email`) VALUES
-(1, 'Peter', 'peter.parker@spider.com'),
-(2, 'Daryl', 'daryl@lexus.fr');
+INSERT INTO `t_customer` (DISCRIMINATOR, `CUSTOMER_FIRSTNAME`, `CUSTOMER_EMAIL`) VALUES
+  ('Customer', 'Peter', 'peter.parker@spider.com'),
+  ('Customer', 'Daryl', 'daryl@lexus.fr');
 
 --
 -- Indexes for dumped tables

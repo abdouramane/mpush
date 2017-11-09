@@ -12,13 +12,19 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "t_customer")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name="DISCRIMINATOR",
+        discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value = "Customer")
 public class Customer extends AbstractDatabaseEntity {
 
 
     @Column(name = "CUSTOMER_ID")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
+    private Long id;
 
     /**
      * Customer first name
