@@ -1,15 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material';
+import { HttpModule } from "@angular/http";
 
 
 import { AppComponent } from './app.component';
-import {CustomersService} from "../customers/customers.service";
-import {HttpModule} from "@angular/http";
+import { CustomersService } from "../customers/customers.service";
+import { MenuComponent } from "./menu/menu.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
