@@ -1,8 +1,9 @@
 package fr.mpush.controller;
 
-import fr.mpush.facade.CustomerService;
+import fr.mpush.facade.UserService;
 import fr.mpush.facade.dto.CustomErrorType;
-import fr.mpush.facade.dto.CustomerDTO;
+import fr.mpush.facade.dto.ContactDTO;
+import fr.mpush.facade.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,31 +28,31 @@ public class RestApiController {
     private static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
 
     @Autowired
-    private CustomerService customerService;
+    private UserService userService;
 
-    @RequestMapping("/customers/{id}")
-    public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
-        CustomerDTO customer = customerService.getCustomerById(id);
+    @RequestMapping("/users/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
 
-        if(customer == null) {
-            logger.error("Customer with id {} not found.", id);
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("Customer with id " + id
+        if(user == null) {
+            logger.error("User with id {} not found.", id);
+            return new ResponseEntity<CustomErrorType>(new CustomErrorType("User with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
 
-        return ResponseEntity.ok(customer);
+        return ResponseEntity.ok(user);
     }
 
-    @RequestMapping("/customers")
-    public ResponseEntity<?> listAllCustomers() {
-        List<CustomerDTO> customers = customerService.listAllCustomers();
+    @RequestMapping("/users")
+    public ResponseEntity<?> listAllUsers() {
+        List<UserDTO> users = userService.listAllUsers();
 
-        if(CollectionUtils.isEmpty(customers)) {
-            logger.error("No customers found.");
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No customers found."), HttpStatus.NOT_FOUND);
+        if(CollectionUtils.isEmpty(users)) {
+            logger.error("No user found.");
+            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No user found."), HttpStatus.NOT_FOUND);
         }
 
-        return ResponseEntity.ok(customers);
+        return ResponseEntity.ok(users);
     }
 
 }

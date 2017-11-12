@@ -2,24 +2,24 @@ import { Injectable } from '@angular/core';
 
 import { Headers, Http } from '@angular/http';
 
-import { Customer } from './customer'
+import { User } from './user'
 
 
 @Injectable()
 
-export class CustomersService {
+export class UserService {
 
   constructor(private http: Http) {
 
   }
 
 
-  private customersUrl = '/mpush/api/customers';
+  private usersUrl = '/mpush/api/users';
 
-  getAllCustomers(): Promise<Customer[]> {
-    return this.http.get(this.customersUrl)
+  getAllUsers(): Promise<User[]> {
+    return this.http.get(this.usersUrl)
       .toPromise()
-      .then(response => response.json() as Customer[])
+      .then(response => response.json() as User[])
       .catch(this.handleError);
   }
 

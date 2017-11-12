@@ -3,8 +3,7 @@ package fr.mpush.facade.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CustomerDTO implements Serializable{
-
+public abstract class PersonDTO implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
@@ -14,22 +13,6 @@ public class CustomerDTO implements Serializable{
     private Date modified;
     private Date created;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Long getId() {
         return id;
     }
@@ -38,12 +21,28 @@ public class CustomerDTO implements Serializable{
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CustomersService } from "../customers/customers.service";
-import { Customer } from "../customers/customer";
+import { UserService } from "../users/users.service";
+import { User } from "../users/user";
 
 @Component({
   selector: 'app-root',
@@ -9,14 +9,14 @@ import { Customer } from "../customers/customer";
 })
 export class AppComponent {
   title = 'app';
-  customers: Customer[];
+  users : User[];
 
-  constructor(private customersService: CustomersService) {
+  constructor(private userService: UserService) {
 
   }
 
   ngOnInit() {
-    this.customersService.getAllCustomers().then(customers => this.customers = customers);
+    this.userService.getAllUsers().then(users => this.users = users);
   }
 
 }

@@ -6,7 +6,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 
 import { AppComponent } from './app.component';
-import { CustomersService } from "../customers/customers.service";
+import { UserService } from "../users/users.service";
 import { MenuComponent } from "./menu/menu.component";
 
 @NgModule({
@@ -20,7 +20,7 @@ import { MenuComponent } from "./menu/menu.component";
     MatListModule,
     NgbModule.forRoot()
   ],
-  providers: [CustomersService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

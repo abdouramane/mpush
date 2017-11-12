@@ -39,9 +39,16 @@ CREATE TABLE `Customer` (
 -- Dumping data for table `Customer`
 --
 
-INSERT INTO `t_customer` (DISCRIMINATOR, `CUSTOMER_FIRSTNAME`, `CUSTOMER_EMAIL`) VALUES
-  ('Customer', 'Peter', 'peter.parker@spider.com'),
-  ('Customer', 'Daryl', 'daryl@lexus.fr');
+INSERT INTO `t_person` (DISCRIMINATOR, `PERSON_FIRSTNAME`, `PERSON_EMAIL`) VALUES
+  ('User', 'Peter', 'peter.parker@spider.com'),
+  ('User', 'Daryl', 'daryl@lexus.fr'),
+  ('User', 'Samadou', 'samadou@ensimag.fr'),
+  ('User', 'Anonymous', 'unknow@anonymous.fr');
+
+INSERT INTO `t_person` (DISCRIMINATOR, `PERSON_FIRSTNAME`, `PERSON_EMAIL`) VALUES
+  ('Contact', 'Lucy', 'lucy@scarlet.com'),
+  ('Contact', 'Carmelo', 'carmelo.anthony@nba.com'),
+  ('Contact', 'Henry', 'henry@fox.com');
 
 --
 -- Indexes for dumped tables

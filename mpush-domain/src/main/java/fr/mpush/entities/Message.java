@@ -59,14 +59,14 @@ public class Message extends AbstractDatabaseEntity {
     @JoinTable(name = "t_message_receiver",
     joinColumns = {@JoinColumn(name = "MESSAGE_ID")},
     inverseJoinColumns = {@JoinColumn(name = "CUSTOMER_ID")})
-    private Set<Customer> receivers;
+    private Set<Person> receivers;
 
     /**
      * Message sender
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SENDER_ID")
-    private Customer sender;
+    private Person sender;
 
     public Message(String content, Boolean draft, String title, Date dateSent) {
         this.content = content;
@@ -96,11 +96,11 @@ public class Message extends AbstractDatabaseEntity {
         return dateSent;
     }
 
-    public Set<Customer> getReceivers() {
+    public Set<Person> getReceivers() {
         return receivers;
     }
 
-    public Customer getSender() {
+    public Person getSender() {
         return sender;
     }
 }

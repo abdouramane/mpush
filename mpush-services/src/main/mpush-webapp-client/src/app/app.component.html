@@ -3,15 +3,16 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Bienvenue</h1>
-    <h2>Lorem ipsum dolor loreta</h2>
+    <h2>Lorem ipsum dolor sloreta</h2>
   </div>
 
   <div class="panel panel-primary">
-    <div class="panel-heading">Mes contacts</div>
+    <div class="panel-heading">Les utilisateurs de l'application</div>
     <div class="panel-body">
       <mat-list>
-        <mat-list-item *ngFor="let customer of customers">
-          {{customer.id}} {{customer.firstName}} {{customer.email}}
+        <mat-list-item *ngFor="let user of users">
+          {{user.id}} {{user.firstName}} {{user.email}}
+            Contacts : <mat-list-item *ngFor="let contact of user.contacts">[{{contact.id}} {{contact.firstName}} {{contact.email}}]</mat-list-item>
         </mat-list-item>
       </mat-list>
     </div>
