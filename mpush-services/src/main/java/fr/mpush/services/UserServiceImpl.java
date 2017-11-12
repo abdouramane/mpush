@@ -1,7 +1,6 @@
 package fr.mpush.services;
 
 import fr.mpush.facade.UserService;
-import fr.mpush.facade.dto.ContactDTO;
 import fr.mpush.facade.dto.UserDTO;
 import fr.mpush.mapper.UserMapper;
 import fr.mpush.respository.UserRepository;
@@ -20,8 +19,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserDTO getUserByEmail(String email) {
-        return userMapper.asUserDTO(userRepository.findByEmail(email));
+    public UserDTO getUserByLogin(String login) {
+        return userMapper.asUserDTO(userRepository.findByLogin(login));
     }
 
     @Override

@@ -1,0 +1,25 @@
+<router-outlet *ngIf="loginService.isAuthenticated()"></router-outlet>
+<div class="container" *ngIf="!loginService.isAuthenticated()">
+  <div class="row" id="pwd-container">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+      <section class="login-form">
+        <form (submit)="loginService.login($event)" role="login">
+          <h2 style="text-align:center">Authentification</h2>
+          <input type="text" name="login" placeholder="Identifiant" required class="form-control input-lg"/>
+
+          <input type="password" class="form-control input-lg" id="password" placeholder="Mot de passe" required="" />
+
+          <button type="submit" class="btn btn-lg btn-primary btn-block">Se connecter</button>
+          <div>
+            <a href="#">Créer un compte</a> ou <a href="#">Mot de passe perdu ?</a>
+          </div>
+        </form>
+
+      </section>
+    </div>
+
+  </div>
+
+</div>

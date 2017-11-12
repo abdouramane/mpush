@@ -3,6 +3,7 @@ export class Contact {
   private _firstName;
   private _email;
   private _category;
+  private _login;
 
 
   get id() {
@@ -11,6 +12,14 @@ export class Contact {
 
   set id(value) {
     this._id = value;
+  }
+
+  get login() {
+    return this._login;
+  }
+
+  set login(value) {
+    this._login = value;
   }
 
   get firstName() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDTO getUserByEmail(String email);
+    UserDTO getUserByLogin(String login);
 
     UserDTO getUserById(Long id);
 
