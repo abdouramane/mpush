@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material';
 import { HttpModule } from "@angular/http";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 
 import { AppComponent } from './app.component';
@@ -16,7 +17,8 @@ import { MenuComponent } from "./menu/menu.component";
   imports: [
     BrowserModule,
     HttpModule,
-    MatListModule
+    MatListModule,
+    NgbModule.forRoot()
   ],
   providers: [CustomersService],
   bootstrap: [AppComponent]
