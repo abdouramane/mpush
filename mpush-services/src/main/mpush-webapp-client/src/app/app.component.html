@@ -1,1 +1,7 @@
-<mp-login-form></mp-login-form>
+<mp-menu *ngIf="loginService.isAuthenticated()"></mp-menu>
+
+<div class="container">
+
+  <router-outlet></router-outlet>
+
+</div>

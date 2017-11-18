@@ -9,14 +9,31 @@ import { AppComponent } from './app.component';
 import { UserService } from "../users/users.service";
 import { MenuComponent } from "./menu/menu.component";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
-import { MainComponent } from './pages/main/main.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { LoginService } from "./pages/login-form/login.service";
+import { ContactComponent } from './pages/contact/contact.component';
+import { AuthGuard } from "./auth.guard";
+import { HomeComponent } from './pages/home/home.component';
 
 const appRoutes: Routes = [
   {
+    path: 'login',
+    component: LoginFormComponent
+  },
+  {
+    path: 'contacts',
+    canActivate: [AuthGuard],
+    component: ContactComponent
+  },
+  {
+    path: 'home',
+    canActivate: [AuthGuard],
+    component: HomeComponent
+  },
+  {
     path: '',
-    component: MainComponent,
+    redirectTo: 'home',
+    pathMatch: 'full',
   }
 ];
 
@@ -25,7 +42,8 @@ const appRoutes: Routes = [
     AppComponent,
     MenuComponent,
     LoginFormComponent,
-    MainComponent
+    ContactComponent,
+    HomeComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -37,7 +55,7 @@ const appRoutes: Routes = [
     MatListModule,
     NgbModule.forRoot()
   ],
-  providers: [UserService, LoginService],
+  providers: [UserService, LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

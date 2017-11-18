@@ -28,7 +28,7 @@
             <li><a href="#">Achat SMS</a></li>
           </ul>
         </li>
-        <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span> Mon carnet d'adresses</a></li>
+        <li><a routerLink="contacts"><span class="glyphicon glyphicon-folder-close"></span> Mon carnet d'adresses</a></li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -45,7 +45,7 @@
             <li><a href="#">Paramètres</a></li>
             <li><a href="#">Mes contacts</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Se déconnecter</a></li>
+            <li><a (click)="loginService.logout()">Se déconnecter</a></li>
           </ul>
         </li>
       </ul>

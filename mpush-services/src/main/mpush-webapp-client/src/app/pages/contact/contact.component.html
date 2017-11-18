@@ -1,0 +1,10 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Mon carnet d'adresses</div>
+  <div class="panel-body">
+    <mat-list>
+      <mat-list-item *ngFor="let contact of contacts">
+        {{contact.id}} {{contact.firstName}} {{contact.email}}
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

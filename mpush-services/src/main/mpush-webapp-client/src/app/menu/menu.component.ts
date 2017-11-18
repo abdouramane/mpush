@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LoginService} from "../pages/login-form/login.service";
 
 @Component({
   selector: 'mp-menu',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 
-export class MenuComponent {}
+export class MenuComponent {
+
+  constructor(private loginService: LoginService) {}
+
+}

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from "../users/users.service";
 import { User } from "../users/user";
+import {LoginService} from "./pages/login-form/login.service";
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,9 @@ import { User } from "../users/user";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
   users : User[];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private loginService: LoginService) {
 
   }
 
