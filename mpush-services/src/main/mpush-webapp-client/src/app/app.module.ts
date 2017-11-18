@@ -6,7 +6,7 @@ import { RouterModule, Routes } from "@angular/router";
 
 
 import { AppComponent } from './app.component';
-import { UserService } from "../users/users.service";
+import { UserService } from "../models/users.service";
 import { MenuComponent } from "./menu/menu.component";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import { BrowserModule } from "@angular/platform-browser";

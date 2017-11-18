@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserService } from "../users/users.service";
-import { User } from "../users/user";
+import { UserService } from "../models/users.service";
+import { User } from "../models/user";
 import {LoginService} from "./pages/login-form/login.service";
 
 @Component({

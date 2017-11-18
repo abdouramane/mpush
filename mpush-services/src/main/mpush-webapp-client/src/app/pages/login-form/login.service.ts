@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import {User} from "../../../users/user";
-import {UserService} from "../../../users/users.service";
+import {User} from "../../../models/user";
+import {UserService} from "../../../models/users.service";
 
 
 @Injectable()
