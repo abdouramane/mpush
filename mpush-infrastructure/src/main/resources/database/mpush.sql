@@ -48,7 +48,13 @@ INSERT INTO `t_person` (DISCRIMINATOR, `PERSON_FIRSTNAME`, `PERSON_EMAIL`) VALUE
 INSERT INTO `t_person` (DISCRIMINATOR, `PERSON_FIRSTNAME`, `PERSON_EMAIL`) VALUES
   ('Contact', 'Lucy', 'lucy@scarlet.com'),
   ('Contact', 'Carmelo', 'carmelo.anthony@nba.com'),
-  ('Contact', 'Henry', 'henry@fox.com');
+  ('Contact', 'Henry', 'henry@fox.com'),
+  ('Contact', 'Kader', 'kad@scarlet.com'),
+  ('Contact', 'Merlou', 'merlou.anthony@nba.com'),
+  ('Contact', 'Sam', 'sam@fox.com');
+
+INSERT INTO `t_person` (DISCRIMINATOR, `PERSON_FIRSTNAME`, `PERSON_EMAIL`, USER_LOGIN) VALUES
+  ('User', 'Abdou', 'abdou@chef.fr', 'test');
 
 --
 -- Indexes for dumped tables

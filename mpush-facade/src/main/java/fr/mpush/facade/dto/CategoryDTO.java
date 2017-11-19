@@ -41,4 +41,5 @@ public class CategoryDTO implements Serializable {
     public void setModified(Date modified) {
         this.modified = modified;
     }
+
 }

@@ -1,15 +1,17 @@
 package fr.mpush.facade.dto;
 
 
+import java.util.List;
+
 public class ContactDTO extends PersonDTO {
 
-    private CategoryDTO category;
+    private List<CategoryDTO> categories;
 
-    public CategoryDTO getCategory() {
-        return category;
+    public List<CategoryDTO> getCategories() {
+        return categories;
     }
 
-    public void setCategory(CategoryDTO category) {
-        this.category = category;
+    public void setCategories(List<CategoryDTO> categories) {
+        this.categories = categories;
     }
 }

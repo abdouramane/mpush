@@ -3,6 +3,8 @@ package fr.mpush.entities;
 import fr.mpush.facade.dto.CategoryDTO;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 @Entity
@@ -10,19 +12,20 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "Contact")
 public class Contact extends Person {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<Category> categories;
 
     public Contact() {
         super();
+        this.categories = new ArrayList<Category>();
     }
 
     /**
      * Default constructor
      */
     public Contact(CategoryDTO categoryDTO) {
-        this.category = new Category(categoryDTO.getName());
+        this();
+        this.categories.add(new Category(categoryDTO.getName()));
     }
 
     @Column(name = "CONTACT_ID")
@@ -30,8 +33,8 @@ public class Contact extends Person {
         return id;
     }
 
-    public Category getCategory() {
-        return category;
+    public Collection<Category> getCategories() {
+        return categories;
     }
 
 }

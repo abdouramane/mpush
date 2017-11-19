@@ -11,7 +11,7 @@ import java.util.Date;
  */
 
 @MappedSuperclass
-public class AbstractDatabaseEntity implements Serializable {
+public abstract class AbstractDatabaseEntity implements Serializable {
 
     /**
      * Serial number for serialisation/deserialisation
@@ -24,14 +24,14 @@ public class AbstractDatabaseEntity implements Serializable {
      */
     @Column(name="CREATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date created;
+    private Date created;
 
     /**
      * Modification date of entity field
      */
     @Column(name="MODIFIED_AT")
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date modified;
+    private Date modified;
 
     public Date getCreated() {
         return created;
