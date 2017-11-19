@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
 
   displayedColumns = ['id', 'lastName', 'firstName', 'phoneNumber', 'email', 'categories'];
   contacts: Contact[];
+  selectedContact: Contact = new Contact();
   dataSource: MatTableDataSource<Contact>;
 
   constructor(private userService: UserService) {

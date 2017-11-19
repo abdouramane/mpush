@@ -36,7 +36,6 @@ export class UserService {
 
   isAuthenticated(): boolean {
     if(sessionStorage.getItem('currentUser')) {
-      console.log(JSON.parse(sessionStorage.getItem('currentUser')).id != null);
       return JSON.parse(sessionStorage.getItem('currentUser'));
     }
 
