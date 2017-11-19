@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../../models/users.service";
-import {MatPaginator} from "@angular/material";
+import {MatPaginator, MatSort} from "@angular/material";
 import {MatTableDataSource} from "../../../models/table-data-source";
 import {Contact} from "../../../models/contact";
 
@@ -30,6 +30,8 @@ export class ContactComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  @ViewChild(MatSort) sort: MatSort;
+
   /**
    * Set the paginator after the view init since this component will
    * be able to query its view for the initialized paginator.
@@ -37,6 +39,7 @@ export class ContactComponent implements OnInit {
   ngAfterViewInit() {
     if(this.dataSource){
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 

@@ -2,40 +2,40 @@
   <div class="panel-heading">Mon carnet d'adresses</div>
   <div class="panel-body">
 
-    <div class="table-header">
-      <mat-form-field >
-        <input class="col-sm-12" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    <div class="table-filter" >
+      <mat-form-field class="col-sm-12">
+        <input matInput matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer">
       </mat-form-field>
     </div>
 
-    <mat-table #table [dataSource]="dataSource" >
+    <mat-table #table [dataSource]="dataSource" matSort>
       <!-- Position Column -->
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"> No. </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
       </ng-container>
 
       <!-- LastName Column -->
       <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header="lastName"> Nom </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
       </ng-container>
 
       <!-- LastName Column -->
       <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
       </ng-container>
 
       <!-- Tel Column -->
       <ng-container matColumnDef="phoneNumber">
-        <mat-header-cell *matHeaderCellDef> Téléphone </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Téléphone </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
       </ng-container>
 
       <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
       </ng-container>
 

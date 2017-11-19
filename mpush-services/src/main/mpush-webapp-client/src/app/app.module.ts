@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatListModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatSortModule } from '@angular/material';
 import { HttpModule } from "@angular/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
@@ -58,6 +58,9 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     MatTableModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
     BrowserAnimationsModule
   ],
   providers: [UserService, LoginService, AuthGuard, User],
