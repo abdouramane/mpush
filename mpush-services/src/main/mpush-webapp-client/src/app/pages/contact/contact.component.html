@@ -1,10 +1,64 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary mat-elevation-z8">
   <div class="panel-heading">Mon carnet d'adresses</div>
   <div class="panel-body">
-    <mat-list>
-      <mat-list-item *ngFor="let contact of contacts">
-        {{contact.id}} {{contact.firstName}} {{contact.email}}
-      </mat-list-item>
-    </mat-list>
+
+    <div class="table-header">
+      <mat-form-field >
+        <input class="col-sm-12" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+      </mat-form-field>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource" >
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+
+      <!-- LastName Column -->
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      </ng-container>
+
+      <!-- LastName Column -->
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+      </ng-container>
+
+      <!-- Tel Column -->
+      <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef> Téléphone </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Category Column -->
+      <ng-container matColumnDef="categories">
+        <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-list>
+            <mat-list-item *ngFor="let category of element.categories">
+              {{category.name}}
+            </mat-list-item>
+          </mat-list>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginator
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
   </div>
 </div>

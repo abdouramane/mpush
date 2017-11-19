@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from "./login.service";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'mp-login-form',

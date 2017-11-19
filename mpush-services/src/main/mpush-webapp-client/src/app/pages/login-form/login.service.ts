@@ -12,7 +12,6 @@ export class LoginService {
 
   private loginUrl = '/mpush/login';
   private userUrl = '/mpush/api/users/';
-  private currentUser: User = null;
 
   login(e): void {
     e.preventDefault();
@@ -22,12 +21,12 @@ export class LoginService {
           this.http.get(this.userUrl + data['_body']).subscribe(
             data => {
               // store login information in localStorage
-              this.currentUser = data.json() as User;
-              localStorage.setItem('currentUser', JSON.stringify({
-                id : this.currentUser.id,
-                login : this.currentUser.login,
-                firstName : this.currentUser.firstName,
-                email : this.currentUser.email
+              let user: User = data.json() as User;
+              sessionStorage.setItem('currentUser', JSON.stringify({
+                id : user.id,
+                login : user.login,
+                firstName : user.firstName,
+                email : user.email
               }));
               // Call navigate to home
               this.router.navigate(['home']);
@@ -44,32 +43,12 @@ export class LoginService {
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');;
+    sessionStorage.removeItem('currentUser');;
     this.router.navigate(['login']);
-  }
-
-  isAuthenticated(): boolean {
-    if(localStorage.getItem('currentUser')) {
-      console.log(JSON.parse(localStorage.getItem('currentUser')).id != null);
-      return JSON.parse(localStorage.getItem('currentUser'));
-    }
-
-    return false;
-  }
-
-  getCurrentUser(): User {
-    if(this.currentUser === null && JSON.parse(localStorage.getItem('currentUser'))) {
-      this.currentUser = this.userServie.getUserBId(JSON.parse(localStorage.getItem('currentUser')).id);
-    }
-    return this.currentUser;
   }
 
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
   }
 
-}
-
-interface ItemResponse {
-  user: User;
 }

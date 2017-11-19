@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatListModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { HttpModule } from "@angular/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
@@ -14,6 +14,8 @@ import { LoginService } from "./pages/login-form/login.service";
 import { ContactComponent } from './pages/contact/contact.component';
 import { AuthGuard } from "./auth.guard";
 import { HomeComponent } from './pages/home/home.component';
+import { User } from "../models/user";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const appRoutes: Routes = [
   {
@@ -43,7 +45,7 @@ const appRoutes: Routes = [
     MenuComponent,
     LoginFormComponent,
     ContactComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -53,9 +55,12 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpModule,
     MatListModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule
   ],
-  providers: [UserService, LoginService, AuthGuard],
+  providers: [UserService, LoginService, AuthGuard, User],
   bootstrap: [AppComponent]
 })
 

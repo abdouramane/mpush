@@ -1,9 +1,11 @@
+import {Category} from "./category";
+
 export class Contact {
   private _id;
   private _firstName;
   private _email;
-  private _category;
   private _login;
+  private _categories: Category[];
 
 
   get id() {
@@ -38,11 +40,12 @@ export class Contact {
     this._email = value;
   }
 
-  get category() {
-    return this._category;
+  get categories(): Category[] {
+    return this._categories;
   }
 
-  set category(value) {
-    this._category = value;
+  set categories(value: Category[]) {
+    this._categories = value;
   }
+
 }

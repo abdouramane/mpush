@@ -9,14 +9,11 @@ import {LoginService} from "./pages/login-form/login.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  users : User[];
 
-  constructor(private userService: UserService, private loginService: LoginService) {
-
-  }
+  constructor(private userService: UserService, private loginService: LoginService) { }
 
   ngOnInit() {
-    this.userService.getAllUsers().then(users => this.users = users);
+
   }
 
 }
