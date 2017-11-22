@@ -6,7 +6,6 @@ import { RouterModule, Routes } from "@angular/router";
 
 
 import { AppComponent } from './app.component';
-import { UserService } from "../models/users.service";
 import { MenuComponent } from "./menu/menu.component";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import { BrowserModule } from "@angular/platform-browser";
@@ -16,6 +15,7 @@ import { AuthGuard } from "./auth.guard";
 import { HomeComponent } from './pages/home/home.component';
 import { User } from "../models/user";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { UserService } from "../models/users.service";
 
 const appRoutes: Routes = [
   {
