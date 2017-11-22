@@ -1,5 +1,6 @@
 package fr.mpush.services;
 
+import fr.mpush.entities.User;
 import fr.mpush.facade.UserService;
 import fr.mpush.facade.dto.UserDTO;
 import fr.mpush.mapper.UserMapper;
@@ -33,4 +34,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.asUserDTOList(userRepository.findAll());
     }
 
+    @Override
+    public UserDTO insertUser(UserDTO userDTO) {
+        return userMapper.asUserDTO(userRepository.save(new User(userDTO)));
+    }
 }

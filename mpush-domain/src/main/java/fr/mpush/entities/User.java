@@ -1,5 +1,7 @@
 package fr.mpush.entities;
 
+import fr.mpush.facade.dto.UserDTO;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -39,6 +41,10 @@ public class User extends Person {
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+
+    public User(UserDTO userDTO) {
+        this(userDTO.getLogin(), userDTO.getPassword(), userDTO.getRole());
     }
 
     @Column(name = "USER_ID")

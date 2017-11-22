@@ -11,4 +11,6 @@ public interface UserService {
     UserDTO getUserById(Long id);
 
     List<UserDTO> listAllUsers();
+
+    UserDTO insertUser(UserDTO userDTO);
 }

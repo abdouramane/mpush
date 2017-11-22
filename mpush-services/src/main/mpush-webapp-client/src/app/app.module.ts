@@ -11,9 +11,12 @@ import { MenuComponent } from "./menu/menu.component";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { LoginService } from "./pages/login-form/login.service";
+import { RegistrationService } from "./pages/registration-form/registration.service";
 import { ContactComponent } from './pages/contact/contact.component';
 import { AuthGuard } from "./auth.guard";
 import { HomeComponent } from './pages/home/home.component';
+import { RegistrationFormComponent } from './pages/registration-form/registration-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {
@@ -34,6 +37,11 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'registration',
+    component: RegistrationFormComponent
+
   }
 ];
 
@@ -43,7 +51,8 @@ const appRoutes: Routes = [
     MenuComponent,
     LoginFormComponent,
     ContactComponent,
-    HomeComponent
+    HomeComponent,
+    RegistrationFormComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -51,11 +60,12 @@ const appRoutes: Routes = [
       {useHash: true}
     ),
     BrowserModule,
+    FormsModule,
     HttpModule,
     MatListModule,
     NgbModule.forRoot()
   ],
-  providers: [UserService, LoginService, AuthGuard],
+  providers: [UserService, LoginService, AuthGuard, RegistrationService],
   bootstrap: [AppComponent]
 })
 

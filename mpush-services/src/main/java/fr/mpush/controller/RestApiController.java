@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class RestApiController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/users/{id}")
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
 
@@ -43,7 +41,7 @@ public class RestApiController {
         return ResponseEntity.ok(user);
     }
 
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<?> listAllUsers() {
         List<UserDTO> users = userService.listAllUsers();
 
