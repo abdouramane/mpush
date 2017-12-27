@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row" id="pwd-container">
+    <div class="col-md-4"> </div>
+
+    <div class="alert alert-success" *ngIf="success">
+      <strong>Creation avec succes !</strong>
+      Vous pouvez maintenant <a [routerLink]="['/login']">vous connectez</a>
+      et profitez de mpush !!
+    </div>
+    <div class="alert alert-danger" *ngIf="failure" jhiTranslate="register.messages.error.fail">
+      <strong>Echec de création!</strong> Veuillez rééssayer s'il vous plait!
+    </div>
+    <div class="alert alert-danger" *ngIf="errorUserExists" jhiTranslate="register.messages.error.userexists">
+      <strong>Ce login est déjà utilisé!</strong> Veuillez en choisir un autre.
+    </div>
+    <div class="alert alert-danger" *ngIf="errorToDisplay">
+      Le mot de passe et sa confirmation ne sont pas identiques
+    </div>
+
+
+
+    <div class="col-md-4">
+      <section class="login-form">
+        <form name="form"  (submit)="register()" role="form" #registerForm="ngForm">
+          <h2 style="text-align:center">Création de son compte</h2>
+          <p>
+            <input type="text" name="firstName" [(ngModel)]="registerUser.firstName" placeholder="Prenom"  #firstName="ngModel"  required class="form-control input-lg"/>
+          </p>
+          <p>
+            <input type="text" name="login" [(ngModel)]="registerUser.login" placeholder="Identifiant" #login="ngModel" required class="form-control input-lg"/>
+          </p>
+          <p>
+            <input type="email" name="email" [(ngModel)]="registerUser.email" placeholder="Email" #email="ngModel" required class="form-control input-lg"/>
+          <p>
+          <p>
+            <input type="password" name="password" [(ngModel)]="registerUser.password" placeholder="Password" #password="ngModel" required class="form-control input-lg"/>
+          <p>
+          <p>
+            <input type="password" name="confirmationPassword" [(ngModel)]="confirmationPassword" placeholder="Confirmation du mot de passe" #confirmationPasswordInput="ngModel" required class="form-control input-lg"/>
+          <p>
+          <p>
+            <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-lg btn-primary btn-block">Créer son compte</button>
+          </p>
+          <div>
+            <a [routerLink]="['/login']">J'ai déjà un compte</a>
+          </div>
+        </form>
+
+      </section>
+    </div>
+
+  </div>
+
+</div>
