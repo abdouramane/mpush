@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {
-  MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatPaginatorModule, MatSortModule,
+  MatCheckboxModule, MatFormFieldControl, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatSortModule,
   MatTableModule
 } from '@angular/material';
 import {HttpModule} from "@angular/http";
@@ -18,7 +21,7 @@ import {ContactComponent} from './pages/contact/contact.component';
 import {AuthGuard} from "./auth.guard";
 import {HomeComponent} from './pages/home/home.component';
 import {RegistrationFormComponent} from './pages/registration-form/registration-form.component';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from "../models/users.service";
 import {User} from "../models/user";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -76,6 +79,8 @@ const appRoutes: Routes = [
     MatSortModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatSelectModule,
+    ReactiveFormsModule,
     NgbModule.forRoot()
   ],
   providers: [UserService, LoginService, AuthGuard, RegistrationService, User],

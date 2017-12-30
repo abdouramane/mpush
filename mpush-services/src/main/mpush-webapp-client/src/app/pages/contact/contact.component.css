@@ -1,3 +1,15 @@
 .mat-column-select {
   overflow: initial;
 }
+
+.mat-column-categories {
+  max-width: 100px;
+}
+
+.mat-column-select {
+  max-width: 60px;
+}
+
+.mat-column-id {
+  max-width: 60px;
+}

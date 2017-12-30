@@ -4,6 +4,8 @@ import {MatPaginator, MatSort} from "@angular/material";
 import {MatTableDataSource} from "../../../models/table-data-source";
 import {Contact} from "../../../models/contact";
 import {SelectionModel} from "@angular/cdk/collections";
+import {FormControl} from "@angular/forms";
+import {Category} from "../../../models/category";
 
 @Component({
   selector: 'mp-contact',
@@ -12,19 +14,37 @@ import {SelectionModel} from "@angular/cdk/collections";
 })
 export class ContactComponent implements OnInit {
 
-  displayedColumns = ['select', 'id', 'lastName', 'firstName', 'phoneNumber', 'email'];
+  displayedColumns = ['select', 'id', 'lastName', 'firstName', 'phoneNumber', 'email', 'categories'];
   contacts: Contact[];
   selectedContact: Contact = new Contact();
   dataSource: MatTableDataSource<Contact>;
   initialSelection = [];
   allowMultiSelect = true;
+  categoryFormControl = new FormControl();
   selection : SelectionModel<Contact> = new SelectionModel<Contact>(this.allowMultiSelect, this.initialSelection);
+  avalaibleCategories : Array<Category> = [];
 
   constructor(private userService: UserService) {
     this.userService.getCurrentUser().then(user => {
       this.contacts = user.contacts;
       this.dataSource = new MatTableDataSource(this.contacts);
       this.ngAfterViewInit();
+
+      let result = this.contacts.map(function (item) {
+         return item.categories;
+      }).filter(function (item) {
+         return item.length > 0;
+      });
+      result.forEach(function (value) {
+        value.forEach(function (subValue) {
+          //debugger
+          if(!this.isInAvailableCategories(subValue)) {
+            this.avalaibleCategories.push(subValue);
+          }
+        }, this);
+      }, this);
+      //debugger
+console.log(this.avalaibleCategories);
     });
   }
 
@@ -63,6 +83,15 @@ export class ContactComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  isInAvailableCategories(item : Category) {
+    for(let i=0;i<this.avalaibleCategories.length;i++){
+      if(this.avalaibleCategories[i].id === item.id){
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   ngOnInit() {
 

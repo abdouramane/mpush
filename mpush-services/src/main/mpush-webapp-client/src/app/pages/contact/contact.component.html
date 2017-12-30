@@ -61,6 +61,20 @@
         <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
       </ng-container>
 
+      <!-- Category Column -->
+      <ng-container matColumnDef="categories">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-form-field>
+            <mat-select placeholder="Catégories" [formControl]="categoryFormControl" multiple>
+              <mat-option *ngFor="let category of avalaibleCategories" [value]="category.id">
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> - </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
 
