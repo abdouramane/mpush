@@ -20,6 +20,7 @@ export class ContactComponent implements OnInit {
     this.userService.getCurrentUser().then(user => {
       this.contacts = user.contacts;
       this.dataSource = new MatTableDataSource(this.contacts);
+      this.ngAfterViewInit();
     });
   }
 

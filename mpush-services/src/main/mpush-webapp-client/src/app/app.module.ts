@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { MatListModule } from '@angular/material';
+import {
+  MatFormFieldModule, MatInputModule, MatListModule, MatPaginatorModule, MatSortModule,
+  MatTableModule
+} from '@angular/material';
 import { HttpModule } from "@angular/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterModule, Routes } from "@angular/router";
@@ -17,6 +20,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegistrationFormComponent } from './pages/registration-form/registration-form.component';
 import { FormsModule } from '@angular/forms';
 import {UserService} from "../models/users.service";
+import {User} from "../models/user";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const appRoutes: Routes = [
   {
@@ -63,9 +68,16 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     MatListModule,
+    MatTableModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
+    BrowserAnimationsModule,
     NgbModule.forRoot()
   ],
-  providers: [UserService, LoginService, AuthGuard, RegistrationService],
+  providers: [UserService, LoginService, AuthGuard, RegistrationService, User],
   bootstrap: [AppComponent]
 })
 
