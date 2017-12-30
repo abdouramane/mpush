@@ -6,7 +6,6 @@ import { RouterModule, Routes } from "@angular/router";
 
 
 import { AppComponent } from './app.component';
-import { UserService } from "../users/users.service";
 import { MenuComponent } from "./menu/menu.component";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import { BrowserModule } from "@angular/platform-browser";
@@ -16,7 +15,8 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { AuthGuard } from "./auth.guard";
 import { HomeComponent } from './pages/home/home.component';
 import { RegistrationFormComponent } from './pages/registration-form/registration-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import {UserService} from "../models/users.service";
 
 const appRoutes: Routes = [
   {

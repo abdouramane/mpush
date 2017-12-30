@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import {UserService} from "../../../users/users.service";
 import { Observable } from 'rxjs/Rx';
+import {UserService} from "../../../models/users.service";
 
 @Injectable()
 export class RegistrationService {
