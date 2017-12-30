@@ -3,9 +3,14 @@
   <div class="panel-body">
 
     <div class="table-actions" >
-      <button>Ajouter</button>
-      <button>Supprimer sélection</button>
-      <button>Ajouter au(x) groupe(s)...</button>
+      <button class="btn btn-primary">Ajouter</button>
+      <button class="btn btn-danger"
+              [disabled]="selection.selected.length === 0"
+              data-toggle="modal"
+              data-target="#confirmation">
+        Supprimer sélection
+      </button>
+      <button class="btn btn-default">Ajouter au(x) groupe(s)...</button>
     </div>
 
     <div class="table-filter" >
@@ -117,6 +122,25 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
         <button type="button" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="confirmation">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirmation suppression</h4>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de vouloir supprimer le(s) contact(s) sélectionné(s) ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSelection()">Oui</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

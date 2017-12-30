@@ -97,6 +97,10 @@ export class ContactComponent implements OnInit {
     return false;
   }
 
+  deleteSelection() {
+    //TODO supprimer contacts
+  }
+
   ngOnInit() {
 
   }
