@@ -2,6 +2,12 @@
   <div class="panel-heading">Mon carnet d'adresses</div>
   <div class="panel-body">
 
+    <div class="table-actions" >
+      <button>Ajouter</button>
+      <button>Supprimer sélection</button>
+      <button>Ajouter au(x) groupe(s)...</button>
+    </div>
+
     <div class="table-filter" >
       <mat-form-field class="col-sm-12">
         <input matInput matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer">
@@ -9,6 +15,22 @@
     </div>
 
     <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header="id"> No. </mat-header-cell>
@@ -39,21 +61,8 @@
         <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
       </ng-container>
 
-      <!-- Category Column -->
-      <ng-container matColumnDef="categories">
-        <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <mat-list>
-            <mat-list-item *ngFor="let category of element.categories">
-              {{category.name}}
-            </mat-list-item>
-          </mat-list>
-        </mat-cell>
-      </ng-container>
-
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" data-toggle="modal" (click)="selectedContact = row"
-               data-target="#contactModal"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
 
     </mat-table>
 

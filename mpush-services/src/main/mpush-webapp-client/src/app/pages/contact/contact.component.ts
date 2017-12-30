@@ -3,6 +3,7 @@ import {UserService} from "../../../models/users.service";
 import {MatPaginator, MatSort} from "@angular/material";
 import {MatTableDataSource} from "../../../models/table-data-source";
 import {Contact} from "../../../models/contact";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'mp-contact',
@@ -11,10 +12,13 @@ import {Contact} from "../../../models/contact";
 })
 export class ContactComponent implements OnInit {
 
-  displayedColumns = ['id', 'lastName', 'firstName', 'phoneNumber', 'email', 'categories'];
+  displayedColumns = ['select', 'id', 'lastName', 'firstName', 'phoneNumber', 'email'];
   contacts: Contact[];
   selectedContact: Contact = new Contact();
   dataSource: MatTableDataSource<Contact>;
+  initialSelection = [];
+  allowMultiSelect = true;
+  selection : SelectionModel<Contact> = new SelectionModel<Contact>(this.allowMultiSelect, this.initialSelection);
 
   constructor(private userService: UserService) {
     this.userService.getCurrentUser().then(user => {
@@ -43,6 +47,20 @@ export class ContactComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected == numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
 
