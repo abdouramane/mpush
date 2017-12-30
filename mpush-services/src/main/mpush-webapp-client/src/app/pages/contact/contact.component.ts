@@ -30,21 +30,21 @@ export class ContactComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.contacts);
       this.ngAfterViewInit();
 
+      //Get user's contacts categories
       let result = this.contacts.map(function (item) {
          return item.categories;
       }).filter(function (item) {
          return item.length > 0;
       });
+
+      //Filter categories and push only unique one in the avalaibleCategories
       result.forEach(function (value) {
         value.forEach(function (subValue) {
-          //debugger
           if(!this.isInAvailableCategories(subValue)) {
             this.avalaibleCategories.push(subValue);
           }
         }, this);
-      }, this);
-      //debugger
-console.log(this.avalaibleCategories);
+      }, this); //Propagate this
     });
   }
 
@@ -52,6 +52,10 @@ console.log(this.avalaibleCategories);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  applyFilterCategorySelection(categoryId) {
+    this.dataSource.filter = categoryId;
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
