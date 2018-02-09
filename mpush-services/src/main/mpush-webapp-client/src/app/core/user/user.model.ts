@@ -1,4 +1,4 @@
-import {Contact} from "./contact";
+import {Contact} from "../../pages/contact/contact.model";
 
 export class User extends Contact {
 

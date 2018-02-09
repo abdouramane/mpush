@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {UserService} from "../../../models/users.service";
+import {UserService} from "../../core/user/user.service";
 import {MatPaginator, MatSort} from "@angular/material";
-import {MatTableDataSource} from "../../../models/table-data-source";
-import {Contact} from "../../../models/contact";
+import {MatTableDataSource} from "../../shared/table-data-source";
+import {Contact} from "./contact.model";
 import {SelectionModel} from "@angular/cdk/collections";
 import {FormControl} from "@angular/forms";
-import {Category} from "../../../models/category";
+import {Category} from "./category.model";
 
 @Component({
   selector: 'mp-contact',
@@ -25,27 +25,7 @@ export class ContactComponent implements OnInit {
   avalaibleCategories : Array<Category> = [];
 
   constructor(private userService: UserService) {
-    this.userService.getCurrentUser().then(user => {
-      this.contacts = user.contacts;
-      this.dataSource = new MatTableDataSource(this.contacts);
-      this.ngAfterViewInit();
 
-      //Get user's contacts categories
-      let result = this.contacts.map(function (item) {
-         return item.categories;
-      }).filter(function (item) {
-         return item.length > 0;
-      });
-
-      //Filter categories and keep only one unique value for each existing one in the var list avalaibleCategories
-      result.forEach(function (value) {// Loop over categories
-        value.forEach(function (subValue) {// Loop over categorie values
-          if(!this.isInAvailableCategories(subValue)) {// Put value in the available one if it doesn't exist yet
-            this.avalaibleCategories.push(subValue);
-          }
-        }, this);
-      }, this); //Propagate the application context (this) in order to have access to the var isinAvailableCategories
-    });
   }
 
   applyFilter(filterValue: string) {
@@ -105,7 +85,27 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getCurrentUser().then(user => {
+      this.contacts = user.contacts;
+      this.dataSource = new MatTableDataSource(this.contacts);
+      this.ngAfterViewInit();
 
+      //Get user's contacts categories
+      let result = this.contacts.map(function (item) {
+        return item.categories;
+      }).filter(function (item) {
+        return item.length > 0;
+      });
+
+      //Filter categories and keep only one unique value for each existing one in the var list avalaibleCategories
+      result.forEach(function (value) {// Loop over categories
+        value.forEach(function (subValue) {// Loop over categorie values
+          if(!this.isInAvailableCategories(subValue)) {// Put value in the available one if it doesn't exist yet
+            this.avalaibleCategories.push(subValue);
+          }
+        }, this);
+      }, this); //Propagate the application context (this) in order to have access to the var isinAvailableCategories
+    });
   }
 
 }

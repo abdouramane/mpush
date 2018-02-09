@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import {UserService} from "../../../models/users.service";
+import {UserService} from "../../core/user/user.service";
 
 @Injectable()
 export class RegistrationService {

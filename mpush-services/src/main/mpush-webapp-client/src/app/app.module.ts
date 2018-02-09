@@ -1,18 +1,13 @@
 import {NgModule} from '@angular/core';
 import {
-  MatCheckboxModule, MatFormFieldControl, MatFormFieldModule, MatInputModule, MatListModule, MatOptionModule,
-  MatPaginatorModule,
-  MatSelectModule,
-  MatSortModule,
-  MatTableModule
+  MatCheckboxModule, MatFormFieldModule, MatInputModule, MatListModule, MatPaginatorModule, MatSelectModule,
+  MatSortModule, MatTableModule
 } from '@angular/material';
 import {HttpModule} from "@angular/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {RouterModule, Routes} from "@angular/router";
 
 
 import {AppComponent} from './app.component';
-import {MenuComponent} from "./menu/menu.component";
 import {LoginFormComponent} from './pages/login-form/login-form.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {LoginService} from "./pages/login-form/login.service";
@@ -21,53 +16,26 @@ import {ContactComponent} from './pages/contact/contact.component';
 import {AuthGuard} from "./auth.guard";
 import {HomeComponent} from './pages/home/home.component';
 import {RegistrationFormComponent} from './pages/registration-form/registration-form.component';
-import {FormControl, FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
-import {UserService} from "../models/users.service";
-import {User} from "../models/user";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UserService} from "./core/user/user.service";
+import {User} from "./core/user/user.model";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-
-const appRoutes: Routes = [
-  {
-    path: 'login',
-    component: LoginFormComponent
-  },
-  {
-    path: 'contacts',
-    canActivate: [AuthGuard],
-    component: ContactComponent
-  },
-  {
-    path: 'home',
-    canActivate: [AuthGuard],
-    component: HomeComponent
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: 'registration',
-    component: RegistrationFormComponent
-
-  }
-];
+import {SharedModule} from "./shared/shared.module";
+import {CoreModule} from "./core/core.module";
+import {AppRoutingModule} from "./app-routing/app-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
     LoginFormComponent,
     ContactComponent,
     HomeComponent,
     RegistrationFormComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      {useHash: true}
-    ),
     BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     MatListModule,
@@ -77,11 +45,11 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSortModule,
-    BrowserAnimationsModule,
     MatCheckboxModule,
     MatSelectModule,
-    ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    SharedModule,
+    CoreModule
   ],
   providers: [UserService, LoginService, AuthGuard, RegistrationService, User],
   bootstrap: [AppComponent]
