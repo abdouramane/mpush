@@ -37,14 +37,14 @@ export class ContactComponent implements OnInit {
          return item.length > 0;
       });
 
-      //Filter categories and push only unique one in the avalaibleCategories
-      result.forEach(function (value) {
-        value.forEach(function (subValue) {
-          if(!this.isInAvailableCategories(subValue)) {
+      //Filter categories and keep only one unique value for each existing one in the var list avalaibleCategories
+      result.forEach(function (value) {// Loop over categories
+        value.forEach(function (subValue) {// Loop over categorie values
+          if(!this.isInAvailableCategories(subValue)) {// Put value in the available one if it doesn't exist yet
             this.avalaibleCategories.push(subValue);
           }
         }, this);
-      }, this); //Propagate this
+      }, this); //Propagate the application context (this) in order to have access to the var isinAvailableCategories
     });
   }
 
@@ -54,6 +54,7 @@ export class ContactComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
+  /* TODO implement category selection filter */
   applyFilterCategorySelection(categoryId) {
     this.dataSource.filter = categoryId;
   }
@@ -87,6 +88,7 @@ export class ContactComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  /* Check if an item is in the available categorie */
   isInAvailableCategories(item : Category) {
     for(let i=0;i<this.avalaibleCategories.length;i++){
       if(this.avalaibleCategories[i].id === item.id){
@@ -97,6 +99,7 @@ export class ContactComponent implements OnInit {
     return false;
   }
 
+  /* Delete selected contacts */
   deleteSelection() {
     //TODO supprimer contacts
   }
