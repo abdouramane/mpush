@@ -1,8 +1,11 @@
 package fr.mpush.entities;
 
+import fr.mpush.facade.dto.ContactDTO;
 import fr.mpush.facade.dto.UserDTO;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -37,14 +40,16 @@ public class User extends Person {
         super();
     }
 
-    public User(String login, String password, String role) {
+    public User(Long id, String login, String password, String role) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
     }
 
     public User(UserDTO userDTO) {
-        this(userDTO.getLogin(), userDTO.getPassword(), userDTO.getRole());
+        this(userDTO.getId(), userDTO.getLogin(), userDTO.getPassword(), userDTO.getRole());
+        updateContacts(userDTO);
     }
 
     @Column(name = "USER_ID")
@@ -66,5 +71,19 @@ public class User extends Person {
 
     public Collection<Contact> getContacts() {
         return contacts;
+    }
+
+    private User updateContacts(UserDTO userDTO) {
+        if(CollectionUtils.isEmpty(userDTO.getContacts())){
+            return this;
+        }
+
+        this.contacts = new ArrayList<Contact>();
+
+        for(ContactDTO contactDTO : userDTO.getContacts()) {
+            this.contacts.add(new Contact(contactDTO));
+        }
+
+        return this;
     }
 }

@@ -2,10 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../core/user/user.service";
 import {MatPaginator, MatSort} from "@angular/material";
 import {MatTableDataSource} from "../../shared/table-data-source";
-import {Contact} from "./contact.model";
+import {Contact} from "../../core/models/contact.model";
 import {SelectionModel} from "@angular/cdk/collections";
 import {FormControl} from "@angular/forms";
-import {Category} from "./category.model";
+import {Category} from "../../core/models/category.model";
+import {User} from "../../core/models/user.model";
 
 @Component({
   selector: 'mp-contact',
@@ -16,6 +17,8 @@ export class ContactComponent implements OnInit {
 
   displayedColumns = ['select', 'id', 'lastName', 'firstName', 'phoneNumber', 'email', 'categories'];
   contacts: Contact[];
+  newContact: Contact = new Contact();
+  currentUser: User;
   selectedContact: Contact = new Contact();
   dataSource: MatTableDataSource<Contact>;
   initialSelection = [];
@@ -86,6 +89,7 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getCurrentUser().then(user => {
+      this.currentUser = user;
       this.contacts = user.contacts;
       this.dataSource = new MatTableDataSource(this.contacts);
       this.ngAfterViewInit();
@@ -108,4 +112,18 @@ export class ContactComponent implements OnInit {
     });
   }
 
+  initNewContact() {
+    this.newContact = new Contact();
+  }
+
+  addContact() {
+    console.log(this.newContact);
+
+    if(!this.currentUser.contacts) {
+      this.currentUser.contacts = [];
+    }
+    this.userService.newContact(this.currentUser.id, this.newContact).then(
+      user => this.currentUser = user
+    );
+  }
 }

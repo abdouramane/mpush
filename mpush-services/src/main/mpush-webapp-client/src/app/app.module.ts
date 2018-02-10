@@ -18,7 +18,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {RegistrationFormComponent} from './pages/registration-form/registration-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from "./core/user/user.service";
-import {User} from "./core/user/user.model";
+import {User} from "./core/models/user.model";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";

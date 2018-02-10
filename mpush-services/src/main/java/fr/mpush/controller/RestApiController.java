@@ -1,9 +1,10 @@
 package fr.mpush.controller;
 
 import fr.mpush.facade.UserService;
-import fr.mpush.facade.dto.CustomErrorType;
 import fr.mpush.facade.dto.ContactDTO;
+import fr.mpush.facade.dto.CustomErrorType;
 import fr.mpush.facade.dto.UserDTO;
+import fr.mpush.mapper.ContactMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,9 +71,27 @@ public class RestApiController {
         }
 
         //Create a new user
-        userService.insertUser(userDTO);
+        userService.insertOrUpdateUser(userDTO);
+
         //TODO : send an email to verify user email address
         return new ResponseEntity<String>("User successfully created", HttpStatus.CREATED);
+
+    }
+
+    @PostMapping("/users/{userId}/contacts")
+    public ResponseEntity<?> newContactUser(@PathVariable Long userId, @RequestBody ContactDTO contactDTO) {
+        logger.info("New contact for user ", userId);
+
+        UserDTO userDTO = userService.getUserById(userId);
+        //check if the user already exists
+        if(userDTO == null) {
+            logger.error("User with id {} not found.", userId);
+            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No user found for provided id"), HttpStatus.NO_CONTENT);
+        }
+
+        userDTO.getContacts().add(contactDTO);
+
+        return new ResponseEntity<UserDTO>(userService.insertOrUpdateUser(userDTO), HttpStatus.OK);
 
     }
 

@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { Http } from '@angular/http';
+import {Http} from '@angular/http';
 
-import { User } from './user.model'
+import {User} from '../models/user.model'
+import {Contact} from "../models/contact.model";
 
 
 @Injectable()
@@ -14,6 +15,14 @@ export class UserService {
 
 
   private usersUrl = '/mpush/api/users';
+
+  newContact(id , contact): Promise<User> {
+    debugger
+    return this.http.post(this.usersUrl + "/" + id + "/contacts", contact)
+        .toPromise()
+        .then(response => response.json() as User)
+        .catch(this.handleError);
+  }
 
   getAllUsers(): Promise<User[]> {
     return this.http.get(this.usersUrl)

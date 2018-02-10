@@ -33,6 +33,10 @@ public abstract class AbstractDatabaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modified;
 
+    public AbstractDatabaseEntity() {
+        this.created = new Date();
+    }
+
     public Date getCreated() {
         return created;
     }

@@ -1,14 +1,14 @@
 package fr.mpush.facade.dto;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class UserDTO extends PersonDTO {
 
     private String login;
     private String password;
     private String role;
-    private Collection<ContactDTO> contacts;
+    private List<ContactDTO> contacts;
 
     public String getLogin() {
         return login;
@@ -34,7 +34,7 @@ public class UserDTO extends PersonDTO {
         this.role = role;
     }
 
-    public Collection<ContactDTO> getContacts() {
+    public List<ContactDTO> getContacts() {
         if(contacts == null) {
             contacts = new ArrayList<ContactDTO>();
         }
@@ -42,7 +42,7 @@ public class UserDTO extends PersonDTO {
         return contacts;
     }
 
-    public void setContacts(Collection<ContactDTO> contacts) {
+    public void setContacts(List<ContactDTO> contacts) {
         this.contacts = contacts;
     }
 }

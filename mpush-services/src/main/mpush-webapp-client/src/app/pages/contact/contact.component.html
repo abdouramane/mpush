@@ -3,7 +3,10 @@
   <div class="panel-body">
 
     <div class="table-actions" >
-      <button class="btn btn-primary">Ajouter</button>
+      <button class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#contactAddModal"
+              (click)="initNewContact()">Ajouter</button>
       <button class="btn btn-danger"
               [disabled]="selection.selected.length === 0"
               data-toggle="modal"
@@ -92,37 +95,76 @@
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="contactModal">
+<!-- Popup update contact : refactor this in his own component-->
+<div class="modal fade" tabindex="-1" role="dialog" id="contactUpdateModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Information de mon contact</h4>
+        <h4 class="modal-title">Mettre à jour le contact : {{selectedContact.firstName}}</h4>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="lastName" class="control-label">Nom : </label>
-            <input type="text" class="form-control" id="lastName" value="{{selectedContact.lastName}}">
+            <label for="lastNameToUpdate" class="control-label">Nom : </label>
+            <input type="text" class="form-control" id="lastNameToUpdate" value="{{selectedContact.lastName}}">
           </div>
           <div class="form-group">
-            <label for="firstName" class="control-label">Prénom : </label>
-            <input type="text" class="form-control" id="firstName" value="{{selectedContact.firstName}}">
+            <label for="firstNameToUpdate" class="control-label">Prénom : </label>
+            <input type="text" class="form-control" id="firstNameToUpdate" value="{{selectedContact.firstName}}">
           </div>
           <div class="form-group">
-            <label for="phoneNumber" class="control-label">Téléphone : </label>
-            <input type="number" class="form-control" id="phoneNumber" value="{{selectedContact.phoneNumber}}">
+            <label for="phoneNumberToUpdate" class="control-label">Téléphone : </label>
+            <input type="number" class="form-control" id="phoneNumberToUpdate" value="{{selectedContact.phoneNumber}}">
           </div>
           <div class="form-group">
-            <label for="email" class="control-label">Email : </label>
-            <input type="text" class="form-control" id="email" value="{{selectedContact.email}}">
+            <label for="emailToUpdate" class="control-label">Email : </label>
+            <input type="text" class="form-control" id="emailToUpdate" value="{{selectedContact.email}}">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
         <button type="button" class="btn btn-primary">Enregistrer</button>
       </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Popup add contact : refactor this in his own component-->
+<div class="modal fade" tabindex="-1" role="dialog" id="contactAddModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Nouveau contact</h4>
+      </div>
+      <form name="form" role="form" #contactAddForm="ngForm" (submit)="addContact()">
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="lastName" class="control-label">Nom : </label>
+              <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="newContact.lastName">
+            </div>
+            <div class="form-group">
+              <label for="firstName" class="control-label">Prénom : </label>
+              <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="newContact.firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber" class="control-label">Téléphone : </label>
+              <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="newContact.phoneNumber" required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="control-label">Email : </label>
+              <input type="text" class="form-control" id="email" name="email" [(ngModel)]="newContact.email">
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-primary"
+                [disabled]="contactAddForm.form.invalid">Ajouter</button>
+      </div>
+      </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -28,31 +28,31 @@ public abstract class Person extends AbstractDatabaseEntity {
      * Person first name
      */
     @Column(name = "PERSON_FIRSTNAME")
-    private String firstName;
+    protected String firstName;
 
     /**
      * Person last name
      */
     @Column(name = "PERSON_LASTNAME")
-    private String lastName;
+    protected String lastName;
 
     /**
      * Person email
      */
     @Column(name = "PERSON_EMAIL")
-    private String email;
+    protected String email;
 
     /**
      * Person address
      */
     @Column(name = "PERSON_ADRESS")
-    private String address;
+    protected String address;
 
     /**
      * Person telephone
      */
     @Column(name = "PERSON_PHONE_NUMBER")
-    private String phoneNumber;
+    protected String phoneNumber;
 
     /**
      * Default constructor

@@ -1,6 +1,8 @@
-import {Contact} from "../../pages/contact/contact.model";
+import {Contact} from "./contact.model";
 
 export class User extends Contact {
+
+  private _login;
 
   private _contacts : Contact[];
 
@@ -12,4 +14,11 @@ export class User extends Contact {
     this._contacts = value;
   }
 
+  get login() {
+    return this._login;
+  }
+
+  set login(value) {
+    this._login = value;
+  }
 }

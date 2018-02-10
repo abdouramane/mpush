@@ -12,5 +12,6 @@ public interface UserService {
 
     List<UserDTO> listAllUsers();
 
-    UserDTO insertUser(UserDTO userDTO);
+    UserDTO insertOrUpdateUser(UserDTO userDTO);
+
 }
