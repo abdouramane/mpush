@@ -2,6 +2,7 @@ package fr.mpush.controller;
 
 import fr.mpush.facade.UserService;
 import fr.mpush.facade.dto.ContactDTO;
+import fr.mpush.facade.dto.ContactRequest;
 import fr.mpush.facade.dto.CustomErrorType;
 import fr.mpush.facade.dto.UserDTO;
 import fr.mpush.mapper.ContactMapper;
@@ -92,6 +93,23 @@ public class RestApiController {
         userDTO.getContacts().add(contactDTO);
 
         return new ResponseEntity<UserDTO>(userService.insertOrUpdateUser(userDTO), HttpStatus.OK);
+
+    }
+
+    @PatchMapping("/users/{userId}/contacts")
+    public ResponseEntity<?> deleteUserContact(@PathVariable Long userId, @RequestBody List<Long> contactsId) {
+        logger.info("User's contacts ", userId);
+
+        UserDTO userDTO = userService.getUserById(userId);
+        //check if the user already exists
+        if(userDTO == null) {
+            logger.error("User with id {} not found.", userId);
+            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No user found for provided id"), HttpStatus.NO_CONTENT);
+        }
+
+        userService.deleteUserContacts(userId, contactsId);
+
+        return new ResponseEntity<String>("Contacts deleted.", HttpStatus.OK);
 
     }
 

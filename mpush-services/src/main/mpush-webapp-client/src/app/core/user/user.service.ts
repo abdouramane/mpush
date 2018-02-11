@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 
 import {User} from '../models/user.model'
+import {Contact} from "../models/contact.model";
 
 
 @Injectable()
@@ -15,11 +16,18 @@ export class UserService {
 
   private usersUrl = '/mpush/api/users';
 
-  newContact(id , contact): Promise<User> {
+  newContact(id : number, contact : Contact): Promise<User> {
     return this.http.post(this.usersUrl + "/" + id + "/contacts", contact)
         .toPromise()
         .then(response => response.json() as User)
         .catch(this.handleError);
+  }
+
+  deleteUserContacts(id: number, ids : number[]) {
+    return this.http.patch(this.usersUrl + "/" + id + "/contacts", ids)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
   }
 
   getAllUsers(): Promise<User[]> {

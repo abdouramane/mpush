@@ -14,4 +14,6 @@ public interface UserService {
 
     UserDTO insertOrUpdateUser(UserDTO userDTO);
 
+    void deleteUserContacts(Long userId, List<Long> contactsId);
+
 }

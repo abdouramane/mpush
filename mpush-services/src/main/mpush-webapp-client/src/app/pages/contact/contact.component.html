@@ -16,7 +16,7 @@
       <button class="btn btn-danger"
               [disabled]="selection.selected.length === 0"
               data-toggle="modal"
-              data-target="#confirmation">
+              data-target="#contactDeleteModal">
         Supprimer sélection
       </button>
       <button class="btn btn-default">Ajouter au(x) groupe(s)...</button>
@@ -176,7 +176,7 @@
 </div><!-- /.modal -->
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="confirmation">
+<div class="modal fade" tabindex="-1" role="dialog" id="contactDeleteModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -188,7 +188,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
-        <button type="button" class="btn btn-primary" (click)="deleteSelection()">Oui</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteSelection()">Oui</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
