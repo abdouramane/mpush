@@ -23,6 +23,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {AppRoutingModule} from "./app-routing/app-routing.module";
+import {AlertComponent} from "./core/alert/alert.component";
 
 @NgModule({
   declarations: [

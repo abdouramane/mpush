@@ -2,11 +2,17 @@
   <div class="panel-heading">Mon carnet d'adresses</div>
   <div class="panel-body">
 
+    <div class="alert alert-success" *ngIf="success">
+      {{message}}
+    </div>
+    <div class="alert alert-danger" *ngIf="failure">
+      {{message}}
+    </div>
+
     <div class="table-actions" >
       <button class="btn btn-primary"
               data-toggle="modal"
-              data-target="#contactAddModal"
-              (click)="initNewContact()">Ajouter</button>
+              data-target="#contactAddModal">Ajouter</button>
       <button class="btn btn-danger"
               [disabled]="selection.selected.length === 0"
               data-toggle="modal"
@@ -140,7 +146,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Nouveau contact</h4>
       </div>
-      <form name="form" role="form" #contactAddForm="ngForm" (submit)="addContact()">
+      <form name="form" role="form" #contactAddForm="ngForm">
         <div class="modal-body">
             <div class="form-group">
               <label for="lastName" class="control-label">Nom : </label>
@@ -161,8 +167,8 @@
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        <button type="submit" class="btn btn-primary"
-                [disabled]="contactAddForm.form.invalid">Ajouter</button>
+        <button type="button" class="btn btn-primary" (click)="addContact()"
+                [disabled]="contactAddForm.form.invalid" data-dismiss="modal">Ajouter</button>
       </div>
       </form>
     </div><!-- /.modal-content -->

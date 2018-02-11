@@ -15,6 +15,9 @@ import {User} from "../../core/models/user.model";
 })
 export class ContactComponent implements OnInit {
 
+  message: string = "";
+  success: boolean = false;
+  failure: boolean = false;
   displayedColumns = ['select', 'id', 'lastName', 'firstName', 'phoneNumber', 'email', 'categories'];
   contacts: Contact[];
   newContact: Contact = new Contact();
@@ -28,7 +31,7 @@ export class ContactComponent implements OnInit {
   avalaibleCategories : Array<Category> = [];
 
   constructor(private userService: UserService) {
-
+    this.newContact = new Contact();
   }
 
   applyFilter(filterValue: string) {
@@ -89,41 +92,62 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getCurrentUser().then(user => {
-      this.currentUser = user;
-      this.contacts = user.contacts;
-      this.dataSource = new MatTableDataSource(this.contacts);
-      this.ngAfterViewInit();
-
-      //Get user's contacts categories
-      let result = this.contacts.map(function (item) {
-        return item.categories;
-      }).filter(function (item) {
-        return item.length > 0;
-      });
-
-      //Filter categories and keep only one unique value for each existing one in the var list avalaibleCategories
-      result.forEach(function (value) {// Loop over categories
-        value.forEach(function (subValue) {// Loop over categorie values
-          if(!this.isInAvailableCategories(subValue)) {// Put value in the available one if it doesn't exist yet
-            this.avalaibleCategories.push(subValue);
-          }
-        }, this);
-      }, this); //Propagate the application context (this) in order to have access to the var isinAvailableCategories
+      this.initTable(user);
     });
   }
 
-  initNewContact() {
-    this.newContact = new Contact();
+  initTable(user): void {
+    this.currentUser = user;
+    this.contacts = user.contacts;
+    this.dataSource = new MatTableDataSource(this.contacts);
+    this.ngAfterViewInit();
+
+    //Get user's contacts categories
+    let result = this.contacts.map(function (item) {
+      return item.categories;
+    }).filter(function (item) {
+      return item.length > 0;
+    });
+
+    //Filter categories and keep only one unique value for each existing one in the var list avalaibleCategories
+    result.forEach(function (value) {// Loop over categories
+      value.forEach(function (subValue) {// Loop over categorie values
+        if(!this.isInAvailableCategories(subValue)) {// Put value in the available one if it doesn't exist yet
+          this.avalaibleCategories.push(subValue);
+        }
+      }, this);
+    }, this); //Propagate the application context (this) in order to have access to the var isinAvailableCategories
+
   }
 
   addContact() {
-    console.log(this.newContact);
-
-    if(!this.currentUser.contacts) {
-      this.currentUser.contacts = [];
-    }
+    this.clearAll();
     this.userService.newContact(this.currentUser.id, this.newContact).then(
-      user => this.currentUser = user
+      user => {
+        this.newContact = new Contact();
+        this.initTable(user);
+
+        this.setSuccess("Nouveau contact ajouté !");
+      },
+      error => this.setFailure(error)
     );
+  }
+
+  setSuccess(message: string) : void {
+    this.success = true;
+    this.message = message;
+    this.failure = false;
+  }
+
+  setFailure(message: string) : void {
+    this.failure = true;
+    this.message = message;
+    this.success = false;
+  }
+
+  clearAll(): void {
+    this.failure = false;
+    this.message = "";
+    this.success = false;
   }
 }

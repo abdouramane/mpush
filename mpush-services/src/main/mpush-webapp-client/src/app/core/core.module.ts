@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {MenuComponent} from "./menu/menu.component";
-import { UserComponent } from './user/user.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ReactiveFormsModule} from "@angular/forms";
+import {UserComponent} from './user/user.component';
 import {AppRoutingModule} from "../app-routing/app-routing.module";
 import {RouterModule} from "@angular/router";
+import {AlertComponent} from './alert/alert.component';
 
 @NgModule({
   imports: [
@@ -14,11 +13,13 @@ import {RouterModule} from "@angular/router";
   ],
   declarations: [
     MenuComponent,
-    UserComponent
+    UserComponent,
+    AlertComponent
   ],
   exports: [
     MenuComponent,
     UserComponent,
+    AlertComponent,
     RouterModule
   ]
 })

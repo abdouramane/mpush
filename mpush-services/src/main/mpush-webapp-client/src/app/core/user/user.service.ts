@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 
 import {User} from '../models/user.model'
-import {Contact} from "../models/contact.model";
 
 
 @Injectable()
@@ -17,7 +16,6 @@ export class UserService {
   private usersUrl = '/mpush/api/users';
 
   newContact(id , contact): Promise<User> {
-    debugger
     return this.http.post(this.usersUrl + "/" + id + "/contacts", contact)
         .toPromise()
         .then(response => response.json() as User)
