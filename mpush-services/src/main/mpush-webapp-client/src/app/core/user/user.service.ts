@@ -26,7 +26,7 @@ export class UserService {
   deleteUserContacts(id: number, ids : number[]) {
     return this.http.patch(this.usersUrl + "/" + id + "/contacts", ids)
       .toPromise()
-      .then(response => response.json())
+      .then(response => response)
       .catch(this.handleError);
   }
 
@@ -44,7 +44,7 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  getCurrentUser() {
+  getCurrentUser(): Promise<User> {
     return this.getUserById(JSON.parse(sessionStorage.getItem('currentUser')).id);
   }
 

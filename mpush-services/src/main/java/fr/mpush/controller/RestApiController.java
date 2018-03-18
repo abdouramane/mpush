@@ -2,10 +2,8 @@ package fr.mpush.controller;
 
 import fr.mpush.facade.UserService;
 import fr.mpush.facade.dto.ContactDTO;
-import fr.mpush.facade.dto.ContactRequest;
 import fr.mpush.facade.dto.CustomErrorType;
 import fr.mpush.facade.dto.UserDTO;
-import fr.mpush.mapper.ContactMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,7 @@ public class RestApiController {
 
         if(user == null) {
             logger.error("User with id {} not found.", id);
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("User with id " + id
+            return new ResponseEntity<>(new CustomErrorType("User with id " + id
                     + " not found"), HttpStatus.NOT_FOUND);
         }
 
@@ -49,7 +47,7 @@ public class RestApiController {
 
         if(CollectionUtils.isEmpty(users)) {
             logger.error("No user found.");
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No user found."), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomErrorType("No user found."), HttpStatus.NOT_FOUND);
         }
 
         return ResponseEntity.ok(users);
@@ -62,20 +60,20 @@ public class RestApiController {
         //check if the user already exists
         if(userDTO == null) {
             logger.error("A user must be provided");
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("You must provide a user"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new CustomErrorType("You must provide a user"), HttpStatus.NO_CONTENT);
         }
 
         //verify if the user already exists
         if(userService.getUserByLogin(userDTO.getLogin()) != null) {
             logger.error("User already exists");
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("USER_ALREADY_EXISTS"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new CustomErrorType("USER_ALREADY_EXISTS"), HttpStatus.CONFLICT);
         }
 
         //Create a new user
         userService.insertOrUpdateUser(userDTO);
 
         //TODO : send an email to verify user email address
-        return new ResponseEntity<String>("User successfully created", HttpStatus.CREATED);
+        return new ResponseEntity<>("User successfully created", HttpStatus.CREATED);
 
     }
 
@@ -87,12 +85,12 @@ public class RestApiController {
         //check if the user already exists
         if(userDTO == null) {
             logger.error("User with id {} not found.", userId);
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No user found for provided id"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new CustomErrorType("No user found for provided id"), HttpStatus.NO_CONTENT);
         }
 
         userDTO.getContacts().add(contactDTO);
 
-        return new ResponseEntity<UserDTO>(userService.insertOrUpdateUser(userDTO), HttpStatus.OK);
+        return new ResponseEntity<>(userService.insertOrUpdateUser(userDTO), HttpStatus.OK);
 
     }
 
@@ -104,12 +102,12 @@ public class RestApiController {
         //check if the user already exists
         if(userDTO == null) {
             logger.error("User with id {} not found.", userId);
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("No user found for provided id"), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(new CustomErrorType("No user found for provided id"), HttpStatus.NO_CONTENT);
         }
 
-        userService.deleteUserContacts(userId, contactsId);
+        userService.deactiveUserContacts(userId, contactsId);
 
-        return new ResponseEntity<String>("Contacts deleted.", HttpStatus.OK);
+        return ResponseEntity.ok("Contact(s) deleted.");
 
     }
 

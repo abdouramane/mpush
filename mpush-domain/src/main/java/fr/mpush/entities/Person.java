@@ -55,6 +55,12 @@ public abstract class Person extends AbstractDatabaseEntity {
     protected String phoneNumber;
 
     /**
+     * Boolean true => this person is active else not
+     */
+    @Column(name = "PERSONE_ACTIVE")
+    protected Boolean active = true;
+
+    /**
      * Default constructor
      */
     public Person() {
@@ -93,6 +99,10 @@ public abstract class Person extends AbstractDatabaseEntity {
         this.id = contact.getId();
     }
 
+    public void deactive(Long id) {
+        this.active = false;
+    }
+
     public Long getId() {
         return id;
     }
@@ -117,4 +127,7 @@ public abstract class Person extends AbstractDatabaseEntity {
         return phoneNumber;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
 }

@@ -94,10 +94,11 @@ export class ContactComponent implements OnInit {
     });
 
     this.userService.deleteUserContacts(this.currentUser.id, contactIds).then(
-      () => this.setSuccess("Contact(s) supprimé(s) !"),
-      error => this.setFailure("Erreur lors de la suppression ! Merci de contacter votre administrateur.")
-
-
+      () => {
+        this.ngOnInit();
+        this.setSuccess("Contact(s) supprimé(s) avec succès !");
+      },
+          () => this.setFailure("Erreur lors de la suppression ! Merci de contacter votre administrateur.")
     );
   }
 
@@ -108,6 +109,7 @@ export class ContactComponent implements OnInit {
   }
 
   initTable(user): void {
+    this.selection.clear();
     this.currentUser = user;
     this.contacts = user.contacts;
     this.dataSource = new MatTableDataSource(this.contacts);

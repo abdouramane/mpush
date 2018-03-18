@@ -9,6 +9,7 @@ import fr.mpush.respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service(value = "customerService")
@@ -25,12 +26,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserByLogin(String login) {
-        return userMapper.asUserDTO(userRepository.findByLogin(login));
+        User user = userRepository.findByLoginAndActiveIsTrue(login);
+
+        //Filter user's contacts
+        if(user.getContacts() != null){
+            user.getContacts().removeIf(contactDTO -> contactDTO.isActive() == null || !contactDTO.isActive());
+        }
+
+        return userMapper.asUserDTO(user);
     }
 
     @Override
     public UserDTO getUserById(Long id) {
-        return userMapper.asUserDTO(userRepository.findOne(id));
+        User user = userRepository.findByIdAndActiveIsTrue(id);
+
+        //Filter user's contacts
+        if(user.getContacts() != null){
+            user.getContacts().removeIf(contactDTO -> contactDTO.isActive() == null || !contactDTO.isActive());
+        }
+
+        return userMapper.asUserDTO(user);
     }
 
     @Override
@@ -40,11 +55,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO insertOrUpdateUser(UserDTO userDTO) {
-        return userMapper.asUserDTO(userRepository.save(new User(userDTO)));
+        User user = userRepository.save(new User(userDTO));
+
+        //Filter user's contacts
+        if(user.getContacts() != null){
+            user.getContacts().removeIf(contactDTO -> contactDTO.isActive() == null || !contactDTO.isActive());
+        }
+
+        return userMapper.asUserDTO(user);
     }
 
     @Override
-    public void deleteUserContacts(Long userId, List<Long> contactsId) {
-        contactRepository.deleteContacts(contactsId);
+    @Transactional(rollbackOn = Exception.class)
+    public void deactiveUserContacts(Long userId, List<Long> contactsId) {
+        contactRepository.deactiveUserContacts(contactsId);
     }
 }

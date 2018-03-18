@@ -1,6 +1,7 @@
 package fr.mpush.controller;
 
 import fr.mpush.facade.UserService;
+import fr.mpush.facade.dto.ContactDTO;
 import fr.mpush.facade.dto.CustomErrorType;
 import fr.mpush.facade.dto.LoginForm;
 import fr.mpush.facade.dto.UserDTO;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.function.Predicate;
 
 /**
  * Login controller
@@ -34,7 +38,7 @@ public class LoginController {
 
         if(user == null) {
             logger.error("Identifiant ou mot passe erroné");
-            return new ResponseEntity<CustomErrorType>(new CustomErrorType("Identifiant ou mot passe erroné"),
+            return new ResponseEntity<>(new CustomErrorType("Identifiant ou mot passe erroné"),
                     HttpStatus.NOT_FOUND);
         }
 

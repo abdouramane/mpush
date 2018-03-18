@@ -12,6 +12,7 @@ public abstract class PersonDTO implements Serializable {
     private String phoneNumber;
     private Date modified;
     private Date created;
+    private Boolean active;
 
     public Long getId() {
         return id;
@@ -75,5 +76,13 @@ public abstract class PersonDTO implements Serializable {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
