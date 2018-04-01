@@ -21,7 +21,7 @@
             <span class="glyphicon glyphicon-envelope"></span> Messages <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Nouveau</a></li>
+            <li><a routerLink="nouveau">Nouveau</a></li>
             <li><a href="#">Brouillons</a></li>
             <li><a href="#">Envoyés <span class="badge">7</span></a></li>
             <li><a href="#">Statistiques</a></li>
@@ -44,7 +44,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="#">Paramètres</a></li>
-            <li><a href="#">Mes contacts</a></li>
+            <li><a routerLink="contacts">Mes contacts</a></li>
             <li role="separator" class="divider"></li>
             <li><a (click)="loginService.logout()">Se déconnecter</a></li>
           </ul>

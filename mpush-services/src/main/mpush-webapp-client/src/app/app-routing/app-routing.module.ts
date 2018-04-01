@@ -6,6 +6,7 @@ import {ContactComponent} from "../pages/contact/contact.component";
 import {LoginFormComponent} from "../pages/login-form/login-form.component";
 import {RouterModule, Routes} from "@angular/router";
 import {AuthGuard} from "../auth.guard";
+import {NouveauComponent} from "../message/nouveau/nouveau.component";
 
 const appRoutes: Routes = [
   {
@@ -16,6 +17,11 @@ const appRoutes: Routes = [
     path: 'contacts',
     canActivate: [AuthGuard],
     component: ContactComponent
+  },
+  {
+    path: 'nouveau',
+    canActivate: [AuthGuard],
+    component: NouveauComponent
   },
   {
     path: 'home',
