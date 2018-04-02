@@ -13,7 +13,7 @@ import {UserService} from "./core/user/user.service";
 export class AppComponent {
   users : User[];
 
-  constructor(private userService: UserService, private loginService: LoginService, private registrationService: RegistrationService) {
+  constructor(public userService: UserService, private loginService: LoginService, private registrationService: RegistrationService) {
 
   }
 

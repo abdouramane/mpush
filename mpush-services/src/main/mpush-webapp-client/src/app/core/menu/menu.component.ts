@@ -10,6 +10,6 @@ import {UserService} from "../user/user.service";
 
 export class MenuComponent {
 
-  constructor(private userService: UserService, private loginService: LoginService) {}
+  constructor(private userService: UserService, public loginService: LoginService) {}
 
 }

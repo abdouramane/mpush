@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
-  private message: string;
-  private success: boolean;
-  private failure: boolean;
+  public message: string;
+  public success: boolean;
+  public failure: boolean;
 
   constructor() {
     this.clearAll();
