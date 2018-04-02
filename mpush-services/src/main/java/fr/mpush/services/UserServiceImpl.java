@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByLoginAndActiveIsTrue(login);
 
         //Filter user's contacts
-        if(user.getContacts() != null){
+        if(user != null && user.getContacts() != null){
             user.getContacts().removeIf(contactDTO -> contactDTO.isActive() == null || !contactDTO.isActive());
         }
 
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByIdAndActiveIsTrue(id);
 
         //Filter user's contacts
-        if(user.getContacts() != null){
+        if(user != null && user.getContacts() != null){
             user.getContacts().removeIf(contactDTO -> contactDTO.isActive() == null || !contactDTO.isActive());
         }
 
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.save(new User(userDTO));
 
         //Filter user's contacts
-        if(user.getContacts() != null){
+        if(user != null && user.getContacts() != null){
             user.getContacts().removeIf(contactDTO -> contactDTO.isActive() == null || !contactDTO.isActive());
         }
 
