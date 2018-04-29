@@ -20,11 +20,14 @@
       "prefix": "mp",
       "styles": [
         "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.less"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/typeahead.js/dist/typeahead.bundle.min.js",
+        "../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

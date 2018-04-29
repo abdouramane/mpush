@@ -21,7 +21,6 @@ export class ContactComponent implements OnInit {
   displayedColumns = ['select', 'id', 'lastName', 'firstName', 'phoneNumber', 'email', 'categories'];
   contacts: Contact[];
   newContact: Contact = new Contact();
-  currentUser: User;
   selectedContact: Contact = new Contact();
   dataSource: MatTableDataSource<Contact>;
   initialSelection = [];
@@ -30,7 +29,7 @@ export class ContactComponent implements OnInit {
   selection : SelectionModel<Contact> = new SelectionModel<Contact>(this.allowMultiSelect, this.initialSelection);
   avalaibleCategories : Array<Category> = [];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public currentUser: User) {
     this.newContact = new Contact();
   }
 
