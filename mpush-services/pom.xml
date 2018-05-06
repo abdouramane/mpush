@@ -10,18 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mpush-services</artifactId>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -38,4 +27,58 @@
 
     <!-- Improve build by removing npm builds from maven build : use npm start from web client to run IHM -->
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <workingDirectory>${basedir}/src/main/mpush-webapp-client</workingDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- Required: This following calls `npm run build` build the mpush-webapp-client (cf package.json) -->
+                        <id>npm install (compile)</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-resources</goal></goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/mpush-webapp-client/dist</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

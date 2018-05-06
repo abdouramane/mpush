@@ -11,7 +11,6 @@ export class NouveauComponent implements OnInit {
   currentUser : User;
 
   constructor(public userService: UserService) {
-    console.log(userService);
     this.userService.getCurrentUser().then(user => this.currentUser = user);
   }
 
