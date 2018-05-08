@@ -10,7 +10,7 @@ spring:
           hibernate.format_sql: true
 
     datasource:
-        url: jdbc:mysql://google/mpush?socketFactory=com.google.cloud.sql.postgres.SocketFactory&socketFactoryArg=mpush-202719:europe-west1:mpush-database-m
-        username: mpush
+        url: jdbc:mysql://mysql-doura.alwaysdata.net:3306/doura_mpush
+        username: doura_mpush
         password: Mpush2017*
         driver-class-name: com.mysql.jdbc.Driver

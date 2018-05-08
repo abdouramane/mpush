@@ -38,7 +38,7 @@
                 <executions>
                     <execution>
                         <!-- Required: This following calls `npm run build` build the mpush-webapp-client (cf package.json) -->
-                        <id>npm install (compile)</id>
+                        <id>npm install (package)</id>
                         <goals>
                             <goal>exec</goal>
                         </goals>
