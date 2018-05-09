@@ -32,11 +32,12 @@
                 <label for="message">
                   Message</label>
                 <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                          placeholder="Message"></textarea>
+                          placeholder="Message" [(ngModel)]="message" (keyup)="onKeyUp($event)"></textarea>
               </div>
             </div>
-            <div class="col-md-12">
-              <button type="submit" class="btn btn-primary pull-right" id="btnEnvoyerSMS">Envoyer</button>
+            <div class="col-md-6 pull-right">
+              <button class="btn btn-default" id="btnAnnuler">Annuler</button>
+              <button type="submit" class="btn btn-primary" id="btnEnvoyerSMS">Envoyer</button>
             </div>
           </div>
         </form>
@@ -46,8 +47,8 @@
       <div class="row">
         <form>
           <legend>Caractères </legend>
-          <div>Restants : 160</div>
-          <div>Nombre de SMS : 1</div>
+          <div>Total : {{totalChar}}</div>
+          <div>Nombre de SMS : {{nbSMS}}</div>
         </form>
       </div>
       <br><br>
