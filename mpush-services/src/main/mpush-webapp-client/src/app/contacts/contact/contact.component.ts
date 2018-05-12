@@ -7,6 +7,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {FormControl} from "@angular/forms";
 import {Category} from "../../core/models/category.model";
 import {User} from "../../core/models/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'mp-contact',
@@ -29,7 +30,7 @@ export class ContactComponent implements OnInit {
   selection : SelectionModel<Contact> = new SelectionModel<Contact>(this.allowMultiSelect, this.initialSelection);
   avalaibleCategories : Array<Category> = [];
 
-  constructor(private userService: UserService, public currentUser: User) {
+  constructor(private userService: UserService, public currentUser: User, private router: Router) {
     this.newContact = new Contact();
   }
 
@@ -143,6 +144,13 @@ export class ContactComponent implements OnInit {
       },
       response => this.setFailure(response.error)
     );
+  }
+
+  sendSMS() {
+    console.log(this.selection.selected);
+    //Récupérer la valeur des adresses destinataires dans le composant nouveau message
+    this.router.navigate(['nouveau'], this.selection.selected);
+
   }
 
   setSuccess(message: string) : void {
