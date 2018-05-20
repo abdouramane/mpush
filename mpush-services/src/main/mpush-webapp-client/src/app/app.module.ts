@@ -23,6 +23,7 @@ import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {MessageModule} from "./message/message.module";
 import {ContactsModule} from "./contacts/contacts.module";
+import {MessageService} from "./message/message.service";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import {ContactsModule} from "./contacts/contacts.module";
     SharedModule,
     CoreModule
   ],
-  providers: [UserService, LoginService, AuthGuard, RegistrationService, User],
+  providers: [UserService, LoginService, AuthGuard, RegistrationService, User, MessageService],
   bootstrap: [AppComponent]
 })
 

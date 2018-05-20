@@ -1,13 +1,22 @@
 <div class="container">
+  <div class="alert alert-success" *ngIf="success">
+    {{notification}}
+  </div>
+  <div class="alert alert-danger" *ngIf="failure">
+    {{notification}}
+  </div>
   <div class="row">
     <div class="col-md-8">
       <div class="well well-sm">
-        <form>
+        <form #frmSendMessage="ngForm">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="destinataires">Destinataire(s)</label>
-                <input class="form-control bootstrap-tagsinput" data-role="tagsinput" id="destinataires" required="required">
+                <select multiple class="form-control bootstrap-tagsinput" data-role="tagsinput"
+                        id="destinataires" #destinataires
+                        required="required">
+                </select>
               </div>
               <div class="form-group">
                 <label for="programmer">Programmation envoi SMS</label>
@@ -32,12 +41,12 @@
                 <label for="message">
                   Message</label>
                 <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                          placeholder="Message" [(ngModel)]="message" (keyup)="onKeyUp($event)"></textarea>
+                          placeholder="Message" [(ngModel)]="message.content" (keyup)="onKeyUp($event)"></textarea>
               </div>
             </div>
             <div class="col-md-6 pull-right">
               <button class="btn btn-default" id="btnAnnuler">Annuler</button>
-              <button type="submit" class="btn btn-primary" id="btnEnvoyerSMS">Envoyer</button>
+              <button type="submit" (click)="sendMessage()" class="btn btn-primary" id="btnEnvoyerSMS">Envoyer</button>
             </div>
           </div>
         </form>

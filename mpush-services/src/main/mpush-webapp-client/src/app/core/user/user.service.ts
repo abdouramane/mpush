@@ -20,28 +20,28 @@ export class UserService {
     return this.http.post(this.usersUrl + "/" + id + "/contacts", contact)
         .toPromise()
         .then(response => response.json() as User)
-        .catch(this.handleError);
+        .catch(UserService.handleError);
   }
 
   deleteUserContacts(id: number, ids : number[]) {
     return this.http.patch(this.usersUrl + "/" + id + "/contacts", ids)
       .toPromise()
       .then(response => response)
-      .catch(this.handleError);
+      .catch(UserService.handleError);
   }
 
   getAllUsers(): Promise<User[]> {
     return this.http.get(this.usersUrl)
       .toPromise()
       .then(response => response.json() as User[])
-      .catch(this.handleError);
+      .catch(UserService.handleError);
   }
 
   getUserById(userId) : Promise<User> {
     return this.http.get(this.usersUrl + '/' + userId)
       .toPromise()
       .then(response => response.json() as User)
-      .catch(this.handleError);
+      .catch(UserService.handleError);
   }
 
   getCurrentUser(): Promise<User> {
@@ -56,7 +56,7 @@ export class UserService {
     return false;
   }
 
-  private handleError(error: any): Promise<any> {
+  private static handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
